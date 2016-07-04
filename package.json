@@ -27,6 +27,7 @@
     "express": "~4.14.0",
     "express-session": "^1.13.0",
     "fb": "github:alarner/facebook-node-sdk",
+    "howhap-fetch": "^1.1.2",
     "howhap-middleware": "^4.1.1",
     "include-all": "^0.1.6",
     "knex": "^0.11.7",

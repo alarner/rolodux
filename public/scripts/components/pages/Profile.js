@@ -1,28 +1,48 @@
 let React = require('react');
+let fetch = require('howhap-fetch');
 let WorkHistoryRow = require('../WorkHistoryRow');
 
-let descriptions = [
-	'As a software engineer on the Internal Tools team at Trello, I gather requirements and write software to help the company streamline and automate time consuming tasks.',
-	'As an instructor at The Iron Yard I am responsible for educating students who wish to switch careers into software development. I instruct a new class of 10-20 students every four months and teach them technical skills necessary to excel as a junior font-end developer, such as HTML, CSS, and JavaScript (vanilla, jQuery, Backbone, React, Node). In addition to technical skills I teach useful developer tools and methodologies such as command line usage, Git/GitHub, agile methodologies and how to work effectively in a team.'
-];
-
 module.exports = React.createClass({
+	getInitialState: function() {
+		return {
+			user: null,
+			error: null
+		};
+	},
+	componentWillMount: function() {
+		fetch.get(`/api/v1/user?where[id]=${this.props.params.id}&withRelated[0]=workHistory`)
+		.then(users => {
+			if(!users.length) {
+				this.setState({ error: 'Profile not found' });
+			}
+			else {
+				this.setState({ user: users[0] });
+			}
+		});
+	},
 	render: function() {
+		const { user, error } = this.state;
+		if(error) {
+			return <div>{error}</div>;
+		}
+		if(!user) {
+			return <div>Loading...</div>;
+		}
+		const workHistoryRows = user.workHistory.map(history => {
+			return <WorkHistoryRow
+				key={history.id}
+				title={history.title}
+				company={history.company}
+				startDate={history.startDate}
+				endDate={history.endDate}
+				description={history.description} />;
+		});
+
 		return (
 			<div>
-				<h1>Profile</h1>
+				<h1>{user.firstName} {user.lastName}</h1>
 				<h4>Work History</h4>
-				<WorkHistoryRow
-					title="Software Engineer"
-					company="Trello"
-					startDate="2016-06-01"
-					description={descriptions[0]} />
-				<WorkHistoryRow
-					title="Frontend Engineering Instructor"
-					company="The Iron Yard"
-					startDate="2015-01-01"
-					endDate="2016-05-24"
-					description={descriptions[1]} />
+				{workHistoryRows}
 			</div>
 		);
 	}
