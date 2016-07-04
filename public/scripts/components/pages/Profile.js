@@ -39,10 +39,39 @@ module.exports = React.createClass({
 		});
 
 		return (
-			<div>
-				<h1>{user.firstName} {user.lastName}</h1>
-				<h4>Work History</h4>
-				{workHistoryRows}
+			<div className="page">
+				<div className="row">
+					<div className="column column-66">
+						<h3>{user.firstName} {user.lastName}</h3>
+						<p>Short description goes here</p>
+						<div className="profile-buttons">
+							<button>Connect</button>
+							<button>Message</button>
+						</div>
+						<div>
+							<h4>Self Summary</h4>
+							<p>Lorem ipsum In nulla velit fugiat dolore Ut in reprehenderit fugiat fugiat culpa ut in est commodo dolor sit anim in eu sit labore minim quis eiusmod proident exercitation reprehenderit occaecat officia sed laborum occaecat deserunt occaecat esse qui Duis Duis quis.</p>
+						</div>
+						<div>
+							<h4>Work History</h4>
+							{workHistoryRows}
+						</div>
+					</div>
+					<div className="column column-33">
+						<h4>Links</h4>
+						<ul>
+							<li>
+								<a href="https://twitter.com/alarner">Twitter</a>
+							</li>
+							<li>
+								<a href="https://github.com/alarner">GitHub</a>
+							</li>
+							<li>
+								<a href="http://nutellahabit.com/">Blog</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		);
 	}
