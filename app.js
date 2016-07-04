@@ -69,11 +69,10 @@ app.use('/api/v1/', api);
 app.use('/auth', auth);
 app.use('/', index);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	let err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+// Any request that don't match the above routes should render the home page and let React Router
+// take over from there.
+app.use(function(req, res) {
+	res.render('index');
 });
 
 // error handlers
