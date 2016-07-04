@@ -1,7 +1,6 @@
 let React = require('react');
 let { Link } = require('react-router');
-let slug = require('slug');
-
+let user = require('../user');
 module.exports = React.createClass({
 	render: function() {
 		let links = [
@@ -9,8 +8,8 @@ module.exports = React.createClass({
 		];
 
 		// User is logged in
-		if(window.user) {
-			links.push(<Link key="profile" to={`/profile/${slug(window.user.firstName+' '+window.user.lastName)}/${window.user.id}`}>View Profile</Link>);
+		if(user.isLoggedIn()) {
+			links.push(<Link key="profile" to={`/profile/${user.slug()}/${user.get('id')}`}>View Profile</Link>);
 			links.push(<Link key="edit" to="/edit">Edit Profile</Link>);
 			links.push(<Link key="messages" to="/messages">Messages</Link>);
 			links.push(<Link key="connections" to="/connections">Connections</Link>);
