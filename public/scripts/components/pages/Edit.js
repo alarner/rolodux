@@ -1,6 +1,7 @@
 let React = require('react');
 let fetch = require('howhap-fetch');
 let user = require('../../user');
+let WorkHistoryTable = require('../WorkHistoryTable');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -47,44 +48,46 @@ module.exports = React.createClass({
 					</div>
 				</div>
 				<div className="row">
-					<form className="column column-66" onSubmit={this.saveUser}>
-						<div className="row">
-							<label className="column column-50">
-								First Name
-								<input
-									type="text"
-									defaultValue={this.state.user.firstName}
-									ref="firstName" />
-							</label>
-							<label className="column column-50">
-								Last Name
-								<input
-									type="text"
-									defaultValue={this.state.user.lastName}
-									ref="lastName" />
-							</label>
-						</div>
-						<div className="row">
-							<label className="column">
-								Short Description
-								<input
-									type="text"
-									defaultValue={this.state.user.shortDescription}
-									ref="shortDescription" />
-							</label>
-						</div>
-						<div className="row">
-							<label className="column">
-								Self Summary
-								<textarea
-									defaultValue={this.state.user.selfSummary}
-									ref="selfSummary"
-									onChange={this.changeUser}>
-								</textarea>
-							</label>
-						</div>
-						<input type="submit" className="invisible-submit" />
-					</form>
+					<div className="column column-66">
+						<form onSubmit={this.saveUser}>
+							<div className="row">
+								<label className="column column-50">
+									First Name
+									<input
+										type="text"
+										defaultValue={this.state.user.firstName}
+										ref="firstName" />
+								</label>
+								<label className="column column-50">
+									Last Name
+									<input
+										type="text"
+										defaultValue={this.state.user.lastName}
+										ref="lastName" />
+								</label>
+							</div>
+							<div className="row">
+								<label className="column">
+									Short Description
+									<input
+										type="text"
+										defaultValue={this.state.user.shortDescription}
+										ref="shortDescription" />
+								</label>
+							</div>
+							<div className="row">
+								<label className="column">
+									Self Summary
+									<textarea
+										defaultValue={this.state.user.selfSummary}
+										ref="selfSummary"
+										onChange={this.changeUser}>
+									</textarea>
+								</label>
+							</div>
+							<input type="submit" className="invisible-submit" />
+						</form>
+					</div>
 					<div className="column column-33">
 						<button className="edit-save" onClick={this.saveUser}>Save</button>
 					</div>
