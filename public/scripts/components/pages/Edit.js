@@ -87,6 +87,16 @@ module.exports = React.createClass({
 							</div>
 							<input type="submit" className="invisible-submit" />
 						</form>
+						<div className="row">
+							<div className="column">
+								<label>Work History</label>
+							</div>
+						</div>
+						<div className="row">
+							<div className="column">
+								<WorkHistoryTable workHistory={this.state.user.workHistory} />
+							</div>
+						</div>
 					</div>
 					<div className="column column-33">
 						<button className="edit-save" onClick={this.saveUser}>Save</button>
