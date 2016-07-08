@@ -34,3 +34,19 @@ nav {
 		margin-right: 1rem;
 	}
 }
+
+.button-large {
+	font-size: 1.4rem;
+	height: 4.5rem;
+	line-height: 4.5rem;
+	padding: 0 2rem;
+}
+
+.button-full {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input.invisible-submit {
+	display: none;
+}

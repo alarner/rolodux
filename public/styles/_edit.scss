@@ -1,0 +1,16 @@
+.edit-save {
+	line-height: 8rem;
+	font-size: 1.4rem;
+	height: 8rem;
+	padding: 0 2rem;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.save-message {
+	visibility: hidden;
+
+	&.visible {
+		visibility: visible;
+	}
+}
