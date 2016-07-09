@@ -1,14 +1,19 @@
 let React = require('react');
 let fetch = require('howhap-fetch');
+let Rayon = require('Rayon');
 let user = require('../../user');
 let WorkHistoryTable = require('../WorkHistoryTable');
+let WorkHistoryForm = require('../WorkHistoryForm');
 
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
 			user: null,
 			errors: {},
-			showSaveMessage: false
+			showSaveMessage: false,
+			modal: {
+				job: false
+			}
 		};
 	},
 	componentWillMount: function() {
@@ -89,7 +94,8 @@ module.exports = React.createClass({
 						</form>
 						<div className="row">
 							<div className="column">
-								<label>Work History</label>
+								<label className="float-left">Work History</label>
+								<button className="float-right" onClick={this.changeModal('job', true)}>Add Job</button>
 							</div>
 						</div>
 						<div className="row">
@@ -102,8 +108,19 @@ module.exports = React.createClass({
 						<button className="edit-save" onClick={this.saveUser}>Save</button>
 					</div>
 				</div>
+				<Rayon isOpen={this.state.modal.job} onClose={this.changeModal('job', false)} bodyClass="rayon-no-overflow">
+					<WorkHistoryForm onClose={this.changeModal('job', false)} onAdd={this.addJob} />
+				</Rayon>
 			</div>
 		);
+	},
+
+	changeModal: function(type, visible) {
+		return (e) => {
+			let newState = { modal: {} };
+			newState.modal[type] = visible;
+			this.setState(newState);
+		};
 	},
 
 	toastSaveMessage: function() {
@@ -139,5 +156,14 @@ module.exports = React.createClass({
 				this.toastSaveMessage();
 			});
 		}
+	},
+
+	addJob: function(job) {
+		let { user } = this.state;
+		if(user && user.workHistory) {
+			user.workHistory = user.workHistory.concat([job]);
+		}
+		this.changeModal('job', false)();
+		this.setState({ user });
 	}
 });
